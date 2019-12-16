@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - User management for admins in the Console.
 - User list command in the CLI.
 - Support for Microchip ATECC608A-TNGLORA-C manifest files in device template conversion.
+- Forwarding of backend warnings to the Console.
+- Auth Info service to the JavaScript SDK.
+- Subscribable events to the JavaScript SDK.
 
 ### Changed
 
