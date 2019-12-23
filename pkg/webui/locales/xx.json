@@ -487,7 +487,6 @@
   "lib.shared-messages.users": "Xxxxx",
   "lib.shared-messages.validateAddress": "Xxxxx xxxxxxx xxxxxx",
   "lib.shared-messages.validateAddressFormat": "Xxxxx xxxxxxx xxxxxx, xxxxxx xx xxxx xx xxxx:xxxx",
-  "lib.shared-messages.validateAlphanum": "Xxx xxxxx xxxx xx xxxxxxxxxxxx xxx xxxxxxx xx xxxxxx",
   "lib.shared-messages.validateEmail": "Xxxxxxx xxxxx xxxxxxx",
   "lib.shared-messages.validateFormat": "Xxxxx xxxxxx",
   "lib.shared-messages.validateInt32": "Xxxxxxx xxxxxxx xxxxxx",

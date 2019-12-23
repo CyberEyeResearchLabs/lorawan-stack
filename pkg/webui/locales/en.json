@@ -487,7 +487,6 @@
   "lib.shared-messages.users": "Users",
   "lib.shared-messages.validateAddress": "Wrong address format",
   "lib.shared-messages.validateAddressFormat": "Wrong address format, should be host or host:port",
-  "lib.shared-messages.validateAlphanum": "The value must be alphanumeric and contain no spaces",
   "lib.shared-messages.validateEmail": "Invalid email address",
   "lib.shared-messages.validateFormat": "Wrong format",
   "lib.shared-messages.validateInt32": "Invalid numeric format",
