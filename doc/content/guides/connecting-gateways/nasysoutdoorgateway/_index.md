@@ -1,15 +1,15 @@
 ---
-title: "NASYS LoRaWAN® Outdoor Gateway"
+title: "NASys LoRaWAN Outdoor Gateway"
 description: ""
 weight: 1
 ---
 
-NASYS LoRaWAN® Outdoor Gateway is an 8 Channel LoRaWAN gateway, whose technical specifications can be found in [the official product page][1]. This page guides you to connect it to {{% tts %}}.
+NASys LoRaWAN Outdoor Gateway is an 8 Channel LoRaWAN gateway, whose technical specifications can be found in [the official product page](https://www.nasys.no/product/lorawan-gateway/). This page guides you to connect it to {{% tts %}}.
 
 ## Prerequisites
 
 1. User account on {{% tts %}} with rights to create Gateways.
-2. LoRaWAN® Outdoor Gateway connected to the Internet (or your local network) via Ethernet.
+2. NASys LoRaWAN Outdoor Gateway connected to the internet (or your local network) via ethernet.
 
 ## Registration
 
@@ -30,7 +30,6 @@ Your gateway should come with a slightly modified version of the [Lora-net UDP p
 Typically, you should not need to touch the `global_conf.json` file. Instead, edit `local_conf.json`
 
 ```bash
-$ cp /opt/nas-lgw/local_conf.json /opt/nas-lgw/local_conf.json.bak
 $ vi /opt/nas-lgw/local_conf.json
 ```
 
@@ -61,15 +60,6 @@ $ journalctl -f -u nas_lgw -n 1000
 
 > **IMPORTANT NOTE**: The gateway logs will rotate when they reach about 15M in size, which means that you will generally not be able to access very old logs. At times of dense traffic (e.g. ~1000s of devices) this typically means that you will only have logs for 2-3 hours. If you want to keep historical data (for whatever reason), then you will have to forward the logs to an external server. If you decide to do so, then `netcat` may be useful:
 
-```bash
-$ journalctl -f | nc server-hostname server-port
-```
-
-## References / Useful links
-
-1. [Official product page][1]
-2. [Quick start guide][2]
-
-
-[1]: https://www.nasys.no/product/lorawan-gateway/ "Official Product Page"
-[2]: https://www.nasys.no/wp-content/uploads/lorawan_gateway_quick_start_guide_1.pdf "Quick start guide"
+> ```bash
+> $ journalctl -f | nc server-hostname server-port
+> ```
