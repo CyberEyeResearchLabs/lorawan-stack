@@ -4,16 +4,13 @@ description: ""
 weight: 8
 ---
 
-
 ## Connecting MultiTech Conduit to {{%tts%}}
 
 The [MultiConnect® Conduit™](http://www.multitech.net/developer/products/multiconnect-conduit-platform/) is a configurable, scalable cellular communications gateway for industrial IoT applications. The technical specifications of this conduit can be found in the **[official documentation](https://www.multitech.com/documents/publications/software-guides/s000727%20-%20mPower%20Edge%20Intelligence%20Conduit_AEP_software_guide.pdf).**
 
-The Conduit allows users to plug in two MultiConnect mCard™ accessory cards supporting wired or wireless interfaces.
+This guide will help you set up the gateway to communicate over **{{%tts%}}**.
 
 {{< figure src="001_Multitech_Conduit_AEP.png" alt="multitech Conduit AEP" >}}
-
-This guide will help you set up the gateway to communicate over **{{%tts%}}**. 
 
 <!--more-->
 
@@ -121,7 +118,8 @@ Click on **Next** to proceed.
 You can modify the network interfaces as desired. However, for the initial setup, you can leave the default settings as-is. 
 
 {{< figure src="011_Network_Interface_Configuration.png" alt="Network Interface Configuration" >}}
-<br>
+
+
 Click on **Next** to proceed.
 
 <br>
@@ -160,7 +158,7 @@ Click on **Next** to proceed.
 #### HTTP/HTTPS Access
 
 The device allows only secure access to its Web UI. This panel defines how the device handles HTTP traffic like, automatically redirecting HTTP requests to the device's secure HTTPS port, etc. You can choose **LAN** or **WAN** as desired.
-<br>
+
 
 {{< figure src="015_Access_Configuration.png" alt="Access Configuration" >}}
 
@@ -173,12 +171,7 @@ Click on **Next** to proceed.
 
 This feature enables password authentication to access the device bootloader. It is disabled by default.
 
-
 {{< figure src="016_Bootloader_Protection.png" alt="Bootloader Protection" >}}
-
-
-> The Bootloader Protection settings depend on the previous u-boot configuration and are preserved when the device is reset to factory defaults.
-
 
 Click on **Finish**.
 #### 
@@ -188,8 +181,6 @@ Click on **Finish**.
 <br>
 
 - Click on "**LoRaWAN**" in the menu on the left. It opens the Gateway's configuration page.
-
-<br>
 
 {{< figure src="017_001_Gateway_Menu_LoRaWAN.png" alt="Gateway Menu" >}}
 <br>
@@ -203,15 +194,17 @@ Click on **Finish**.
 
 {{< figure src="019_Frequency_Plan.png" alt="Frequency Plan" >}}
 
-- Scroll down and add:
+| <ul><li>Scroll down and add:</li></ul> 	|  	|
+|----------------------------------------------------------	|-------------------------	|
+| {{%tts%}} URL provided to you as the **Server Address**. 	| `thethings.example.com` 	|
+| Upstream Port 	| 1700 	|
+| Downstream Port 	| 1700 	|
 
-|---------------------------------------------------------------------|-----------------------------------------|
-| {{%tts%}} URL provided to you as the **Server Address**. | `thethings.example.com` |
-| Upstream Port                                                       | 1700                                    |
-| Downstream Port                                                     | 1700                                    |
-
+<br>
 
 > If you followed the **[Getting Started guide](https://enterprise.thethingsstack.io/v3.4.0/guides/getting-started/)** , the domain of {{%tts%}} is the same as what you use instead of **https://thethings.example.com**. For example, \<domain\>.eu1.cloud.thethings.industries
+
+<br>
 
 {{< figure src="020_Server_Setup_Configuration.png" alt="Server Configuration" >}}
 
@@ -255,37 +248,12 @@ Network interface shows the configuration for one or more network interfaces ava
 
 - Disconnect the temporary network cable and connect the Conduit to the target network while it restarts.
 
+- Ensure that the target network has Internet access. The Gateway obtains its IP address from the target network after the restart.
+
 To know more about other features of the MultiTech Conduit gateway, you can refer to this **[software guide](https://www.multitech.com/documents/publications/software-guides/s000727%20-%20mPower%20Edge%20Intelligence%20Conduit_AEP_software_guide.pdf).**
 
-<br>
-
-## Upgrading the Firmware
 
 <br>
-Refer to the top of your configuration software window to check your firmware version. You have to upgrade the device's firmware to the latest version. 
-
-You can download firmware upgrades from the downloads section of the MultiTech website ([http://www.multitech.net/developer/downloads/](http://www.multitech.net/developer/downloads/)). 
-
-Do the following to upgrade the firmware on your device:
-
--	Before you upgrade your firmware, **save your present configuration as a backup**. 
--   Go to the MultiTech website, **locate the firmware upgrade file** you want for your device(MTCDT AEP x.x.x in the current case, where x.x.x is the latest version available on the website), and **download** this file to a known location.
--   Goto **Administration -> Firmware Upgrade**. 
--   Click the **Choose Firmware Upgrade File** button:
-    -  Click **Browse** to find where the firmware file resides that you want to apply.
-    -  Select the file and click **Open**. The file name appears next to the **Choose Firmware Upgrade File** button. Make sure you select the correct BIN file; otherwise, your device can become inoperable.
--   Click on **Start Upgrade**.
--   A message about the time needed to upgrade appears. Click on **OK**. 
--   A progress bar appears indicating the status of the upgrade. When the upgrade is completed, your device reboots.
--   After the firmware upgrade is complete, verify your configuration to make sure it is what you expected. 
-
-> **Note**: The new firmware is written into flash memory. It may take up to 10 minutes to upgrade the firmware. Do not interrupt the devices' power or press the reset button during this time.
-<br>
-
-{{< figure src="024_Firmware_Upgrade.png" alt="Firmware Upgrade" >}}
-
-<br>
-
 ## Adding MultiTech Conduit to {{%tts%}} Console
 
 - Login to **[https://thethings.example.com/](https://thethings.example.com/)**. 
@@ -296,16 +264,14 @@ Do the following to upgrade the firmware on your device:
 
 {{< figure src="025_The_Things_Stack_Console.png" alt="The Things Stack Console" >}}
 
-<br>
 
 - Go to **Gateways** in the top menu, and click on "**+ Add Gateway**" to reach the gateway registration page.
 
 - Fill and set the required fields:
     1. Gateway ID
     2. Gateway EUI (Obtained during the gateway LoRaWAN settings configuration)
-    3. Gateway Address (Use your default {{%tts%}} URL thethings.example.com)
+    3. Gateway Address (Use your default {{%tts%}} URL **thethings.example.com**)
     4. Enable/Disable Duty Cycle
-
 
 - Click on **Create Gateway** to create the gateway. 
 
@@ -313,10 +279,52 @@ Do the following to upgrade the firmware on your device:
 
 <br>
 
-- Once the Gateway creation is successful, you can find the newly added Gateway and the configuration in the Console under the “Gateways” section. 
+- Once created, you can find the newly added Gateway and the configuration under the “Gateways” section of the Console.
 
 {{< figure src="027_Gateway_Console_Connection_Status.png" alt="Gateway Connection Status" >}}
 
 <br>
 
-> TODO: Troubleshooting Section
+## Troubleshooting
+
+### Packet Forwarder Logs
+You can find the packet forwarder logs using the gateway&apos;s web console. Do the following to download the logs onto your device:
+
+- Login to your gateway&apos;s web console.
+- Navigate to **Administration -> Debug Options**
+- Click on the **Download Logs** button in the **Logging** section to download the logs.
+
+{{< figure src="028_Packet_Forwarder.png" alt="Packet forwarder" >}}
+
+<br>
+
+- Now, in the downloaded logs, open the **lora-pkt-fwd-1.log** file to see the packet logs.
+
+<br>
+
+### Upgrading the Firmware
+
+
+Refer to the top of your configuration software window to check your firmware version. You have to upgrade the device's firmware to the latest version.
+
+You can download firmware upgrades from the downloads section of the MultiTech website ([http://www.multitech.net/developer/downloads/](http://www.multitech.net/developer/downloads/)).
+
+Do the following to upgrade the firmware on your device:
+
+-	Before you upgrade your firmware, **save your present configuration as a backup**.
+-   Go to the MultiTech website, **locate the firmware upgrade file** you want for your device(MTCDT AEP x.x.x in the current case, where x.x.x is the latest version available on the website), and **download** this file to a known location.
+-   Goto **Administration -> Firmware Upgrade**.
+-   Click the **Choose Firmware Upgrade File** button:
+    -  Click **Browse** to find where the firmware file resides that you want to apply.
+    -  Select the file and click **Open**. The file name appears next to the **Choose Firmware Upgrade File** button. Make sure you select the correct BIN file; otherwise, your device can become inoperable.
+-   Click on **Start Upgrade**.
+-   A message about the time needed to upgrade appears. Click on **OK**.
+-   A progress bar appears indicating the status of the upgrade. When the upgrade is completed, your device reboots.
+-   After the firmware upgrade is complete, verify your configuration to make sure it is what you expected.
+
+> **Note**: The new firmware is written into flash memory. It may take up to 10 minutes to upgrade the firmware. Do not interrupt the devices' power or press the reset button during this time.
+<br>
+
+{{< figure src="024_Firmware_Upgrade.png" alt="Firmware Upgrade" >}}
+
+<br>
