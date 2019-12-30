@@ -298,7 +298,7 @@ You can find the packet forwarder logs using the gateway&apos;s web console. Do 
 
 <br>
 
-- Now, in the downloaded logs, open the **lora-pkt-fwd-1.log** file to see the packet logs.
+- Now, in the downloaded logs, open the **lora-pkt-fwd-1.log** file to see the packet forwarder logs.
 
 <br>
 
