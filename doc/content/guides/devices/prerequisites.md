@@ -1,0 +1,37 @@
+---
+title: "Prerequisites"
+description: ""
+weight: 2
+---
+
+This section describes the prerequisites needed to program The Things Uno to establish communication with The Things Stack.
+
+## Setting up Arduino IDE
+
+The [Arduino Integrated Development Environment (IDE)](https://www.arduino.cc/en/main/software) is a cross-platform application (for Windows, macOS, Linux) that is used to write and upload programs to Arduino compatible boards.
+
+Let’s start by setting up the software development environment to program The Things Uno.
+
+1. [Download](https://www.arduino.cc/en/Main/Software) and install the latest Arduino Software (IDE).
+2. Navigate to **Sketch -> Include Library -> Manage Libraries** to open library manager.
+3. Search for **TheThingsNetwork** and click on the result to select it.
+4. Click on the **Install** button to install it.
+
+{{< figure src="001_arduino_library.png" alt="The Things Network library" >}}
+
+**Note:** The Arduino IDE will notify you of updates for the IDE and library automagically. 
+
+## Connecting The Things Uno to a Computer
+
+To connect your device, proceed with the following steps.
+
+1. Use a Micro-USB cable to connect The Things Uno to a USB port of your computer.
+2. In Arduino IDE, select **Tools -> Board -> Arduino Leonardo**.
+
+{{< figure src="001_arduino_ide.png" alt="Arduino Leonardo Board" >}}
+
+Navigate to **Tools -> Port** and select the port that identifies as Arduino Leonardo.
+
+{{< figure src="002_arduino_ide.png" alt="COM Port for Arduino Leonardo Board" >}}
+
+>If you don't see a port that identifies as Arduino Leonardo, make sure that The Things Uno 's power LED is on, and check the cable and USB port you have used. On Windows, you might need to install drivers. See Arduino Troubleshooting for more suggestions.
