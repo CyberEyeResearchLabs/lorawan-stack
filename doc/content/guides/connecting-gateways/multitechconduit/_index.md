@@ -20,34 +20,34 @@ This guide will help you set up the gateway to communicate over {{%tts%}}.
 
 ## Registration
 
-Create a gateway by following the instructions for the [Console]({{< ref "/guides/getting-started/console#create-gateway" >}}) or the [CLI]({{< ref "/guides/getting-started/cli#create-gateway" >}}). The **EUI** of the gateway can be found at the bottom of the gateway under the field **NODE LORA**.
+Create a gateway by following the instructions for the [Console]({{< ref "/guides/getting-started/console#create-gateway" >}}) or the [CLI]({{< ref "/guides/getting-started/cli#create-gateway" >}}). 
+
+> **Note:** The **EUI** of the gateway can be found at the bottom of the gateway under the field **NODE LORA**.
 
 ## Configuration
 
 In a web browser, open the gateway’s configuration page by navigating to its IP Address obtained from the network it is connected to.
 
-Once logged in, you can configure the gateway to connect to The Things Stack.
+Once logged in, you can configure the gateway to connect to The Things Stack by following the below steps.
 
-### Adding {{%tts%}} Server Address in the Gateway
-
-Click on "**LoRaWAN**" in the menu on the left. It opens the Gateway&apos;s configuration page.
+Click on **LoRaWAN<sup>®</sup>** in the menu on the left. It opens the Gateway&apos;s configuration page.
 
 {{< figure src="005_Gateway_Menu_LoRaWAN.png" alt="MultiTech Conduit gateway home page " >}}
 
 Under **Network Settings**, select the mode as **Packet Forwarder**
 {{< figure src="006_Packet_Forwarder_Gateway.png" alt="MultiTech Conduit packet forwarder settings" >}}
 
-Select your **Channel Plan** (EU868 in this case.)
+Select your **Channel Plan** (EU868 in this case)
 
 {{< figure src="007_Channel_Plan.png" alt="Channel Plan" >}}
 
 Scroll down and set the following parameters:
 
-- **Server Address**: {{%tts%}} URL provided for your deployment. For example,`thethings.example.com`. 
+- **Server Address**: {{%tts%}} URL provided for your deployment. For example,`thethings.example.com` 
 - **Upstream Port**: UDP upstream port of the Gateway Server, typically 1700.
 - **Downstream Port**: UDP downstream port of the Gateway Server, typically 1700.
 
->Replace `thethings.example.com` with the URL of your deployment. <br> For example, `<domain>.<region>.cloud.thethings.industries`.
+>Replace `thethings.example.com` with the URL of your deployment. <br> For example, `<domain>.<region>.cloud.thethings.industries`
 
 {{< figure src="008_Server_Setup_Configuration.png" alt="Gateway server configuration" >}}
 
@@ -69,6 +69,8 @@ This will apply the setting and reboot the gateway. If all the steps have been f
 
 ### Packet Forwarder Logs
 
+Packet forwarder logs contain the messages received from the devices and the network server. You can use the information to debug the issues.
+
 You can find the packet forwarder logs using the gateway&apos;s web console. Do the following to download the logs onto your device:
 
 - Login to your gateway&apos;s web console and navigate to **Administration -> Debug Options**.
@@ -79,6 +81,8 @@ You can find the packet forwarder logs using the gateway&apos;s web console. Do 
 Now, in the downloaded logs, open the **lora-pkt-fwd-1.log** file to see the packet forwarder logs.
 
 ### Upgrading the Firmware
+
+If you have an issue with the current firmware version, you can use following steps to upgrade the firmware.
 
 Refer to the top of your configuration software window to check your firmware version. You have to upgrade the device&apos;s firmware to the latest version.
 
@@ -95,7 +99,7 @@ Do the following to upgrade the firmware on your device:
 - Click on **Start Upgrade**.
 - A message about the time needed to upgrade appears. Click on **OK**.
 - A progress bar appears indicating the status of the upgrade. When the upgrade is completed, your device reboots.
-- After the firmware upgrade is complete, verify your configuration to make sure it is what you expected.
+- After the firmware upgrade is completed, verify your configuration to ensure that it is same as what you expected.
 
 > **Note**: The new firmware is written into flash memory. It may take up to 10 minutes to upgrade the firmware. Do not interrupt the devices&apos; power or press the reset button during this time.
 
