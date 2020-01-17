@@ -16,11 +16,11 @@ This guide will help you set up the gateway to communicate over {{%tts%}}.
 2. Multitech Conduit AEP Gateway connected to internet and running with [latest firmware](http://www.multitech.net/developer/downloads/).
 
 > This article addresses the minimum configuration required to connect your Multitech Conduit AEP model to The Things Stack.
-> For the first-time hardware and software setup, you can refer to the appropriate configuration guide on the [Multitech documentation ](http://www.multitech.net/developer/products/multiconnect-conduit-platform/conduit/) page.
+> For the first-time hardware and software setup, you can refer to the appropriate configuration guide on the [Multitech documentation](http://www.multitech.net/developer/products/multiconnect-conduit-platform/conduit/) page.
 
 ## Registration
 
-Create a gateway by following the instructions for the [Console]({{< ref "/guides/getting-started/console#create-gateway" >}}) or the [CLI]({{< ref "/guides/getting-started/cli#create-gateway" >}}). 
+Create a gateway by following the instructions for the [Console]({{< ref "/guides/getting-started/console#create-gateway" >}}) or the [CLI]({{< ref "/guides/getting-started/cli#create-gateway" >}}).
 
 > **Note:** The **EUI** of the gateway can be found at the bottom of the gateway under the field **NODE LORA**.
 
@@ -28,7 +28,7 @@ Create a gateway by following the instructions for the [Console]({{< ref "/guide
 
 In a web browser, open the gateway’s configuration page by navigating to its IP Address obtained from the network it is connected to.
 
-Once logged in, you can configure the gateway to connect to The Things Stack by following the below steps.
+Once logged in, you can configure the gateway to connect to The Things Stack by following the steps below:
 
 Click on **LoRaWAN<sup>®</sup>** in the menu on the left. It opens the Gateway&apos;s configuration page.
 
@@ -43,11 +43,11 @@ Select your **Channel Plan** (EU868 in this case)
 
 Scroll down and set the following parameters:
 
-- **Server Address**: {{%tts%}} URL provided for your deployment. For example,`thethings.example.com` 
+- **Server Address**: {{%tts%}} URL provided for your deployment. For example,`thethings.example.com`
 - **Upstream Port**: UDP upstream port of the Gateway Server, typically 1700.
 - **Downstream Port**: UDP downstream port of the Gateway Server, typically 1700.
 
->Replace `thethings.example.com` with the URL of your deployment. <br> For example, `<domain>.<region>.cloud.thethings.industries`
+>Replace `thethings.example.com` with the URL of your deployment. For example, `<domain>.<region>.cloud.thethings.industries`
 
 {{< figure src="008_Server_Setup_Configuration.png" alt="Gateway server configuration" >}}
 
