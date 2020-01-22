@@ -13,31 +13,31 @@ This guide will help you set up the gateway to communicate over {{%tts%}}.
 ## Prerequisites
 
 1. User account on {{% tts %}} with rights to create Gateways.
-2. Multitech Conduit AEP Gateway connected to internet and running with [latest firmware](http://www.multitech.net/developer/downloads/).
+2. Multitech Conduit AEP Gateway connected to the internet and running the [latest firmware](http://www.multitech.net/developer/downloads/).
 
-> This article addresses the minimum configuration required to connect your Multitech Conduit AEP model to The Things Stack.
+> This article addresses the minimum configuration required to connect your Multitech Conduit AEP model to {{% tts %}}.
 > For the first-time hardware and software setup, you can refer to the appropriate configuration guide on the [Multitech documentation](http://www.multitech.net/developer/products/multiconnect-conduit-platform/conduit/) page.
 
 ## Registration
 
 Create a gateway by following the instructions for the [Console]({{< ref "/guides/getting-started/console#create-gateway" >}}) or the [CLI]({{< ref "/guides/getting-started/cli#create-gateway" >}}).
 
-> **Note:** The **EUI** of the gateway can be found at the bottom of the gateway under the field **NODE LORA**.
+> Note: The EUI of the gateway can be found at the bottom of the gateway under the field &quot;NODE LORA&quot;.
 
 ## Configuration
 
 In a web browser, open the gateway’s configuration page by navigating to its IP Address obtained from the network it is connected to.
 
-Once logged in, you can configure the gateway to connect to The Things Stack by following the steps below:
+Once logged in, you can configure the gateway to connect to {{%tts%}} by following the steps below:
 
 Click on **LoRaWAN<sup>®</sup>** in the menu on the left. It opens the Gateway&apos;s configuration page.
 
-{{< figure src="005_Gateway_Menu_LoRaWAN.png" alt="MultiTech Conduit gateway home page " >}}
+{{< figure src="005_Gateway_Menu_LoRaWAN.png" alt="MultiTech Conduit gateway home page" >}}
 
-Under **Network Settings**, select the mode as **Packet Forwarder**
+Under **Network Settings**, select the mode as &quot;Packet Forwarder&quot;.
 {{< figure src="006_Packet_Forwarder_Gateway.png" alt="MultiTech Conduit packet forwarder settings" >}}
 
-Select your **Channel Plan** (EU868 in this case)
+Select your Channel Plan (EU868 in this case).
 
 {{< figure src="007_Channel_Plan.png" alt="Channel Plan" >}}
 
@@ -61,7 +61,7 @@ You will be prompted to confirm the restart. Choose **OK** to proceed.
 
 {{< figure src="012_System_Confirmation_Prompt.png" alt="Configuration restart prompt" >}}
 
-This will apply the setting and reboot the gateway. If all the steps have been followed correctly, your gateway will now connect to The Things Stack.
+This will apply the setting and reboot the gateway. If all the steps have been followed correctly, your gateway will now connect to {{%tts%}}.
 
 >To know more about other features of the MultiTech Conduit gateway, you can refer to the **mPower Edge AEP software guide** on the [Multitech Website](http://www.multitech.net/developer/products/multiconnect-conduit-platform/conduit/).
 
@@ -78,7 +78,7 @@ You can find the packet forwarder logs using the gateway&apos;s web console. Do 
 
 {{< figure src="016_Packet_Forwarder.png" alt="Packet forwarder" >}}
 
-Now, in the downloaded logs, open the **lora-pkt-fwd-1.log** file to see the packet forwarder logs.
+Now, in the downloaded logs, open the *lora-pkt-fwd-1.log* file to see the packet forwarder logs.
 
 ### Upgrading the Firmware
 
@@ -90,8 +90,8 @@ You can download the firmware upgrades from the downloads section of the [MultiT
 
 Do the following to upgrade the firmware on your device:
 
-- Before you upgrade your firmware, **save your present configuration as a backup**.
-- Go to the MultiTech website, **locate the firmware upgrade file** you want for your device(MTCDT AEP x.x.x in the current case, where x.x.x is the latest version available on the website), and **download** this file to a known location.
+- Before you upgrade your firmware, save your present configuration as a backup.
+- Go to the MultiTech website, locate the firmware upgrade file you want for your device(MTCDT AEP x.x.x in the current case, where x.x.x is the latest version available on the website), and download this file to a known location.
 - Navigate to **Administration -> Firmware Upgrade**.
 - Click on **Choose Firmware Upgrade File** button, and
   - Click on **Browse** to find where the firmware file resides that you want to apply.
@@ -101,6 +101,6 @@ Do the following to upgrade the firmware on your device:
 - A progress bar appears indicating the status of the upgrade. When the upgrade is completed, your device reboots.
 - After the firmware upgrade is completed, verify your configuration to ensure that it is same as what you expected.
 
-> **Note**: The new firmware is written into flash memory. It may take up to 10 minutes to upgrade the firmware. Do not interrupt the devices&apos; power or press the reset button during this time.
+> Note: The new firmware is written into flash memory. It may take up to 10 minutes to upgrade the firmware. Do not interrupt the devices&apos; power or press the reset button during this time.
 
 {{< figure src="017_Firmware_Upgrade.png" alt="Gateway firmware upgrade window" >}}
