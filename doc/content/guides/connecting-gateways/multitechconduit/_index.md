@@ -16,6 +16,7 @@ This guide will help you set up the gateway to communicate over {{%tts%}}.
 2. Multitech Conduit AEP Gateway connected to the internet and running the [latest firmware](http://www.multitech.net/developer/downloads/).
 
 > This article addresses the minimum configuration required to connect your Multitech Conduit AEP model to {{% tts %}}.
+
 > For the first-time hardware and software setup, you can refer to the appropriate configuration guide on the [Multitech documentation](http://www.multitech.net/developer/products/multiconnect-conduit-platform/conduit/) page.
 
 ## Registration
@@ -102,5 +103,4 @@ Do the following to upgrade the firmware on your device:
 - After the firmware upgrade is completed, verify your configuration to ensure that it is same as what you expected.
 
 > Note: The new firmware is written into flash memory. It may take up to 10 minutes to upgrade the firmware. Do not interrupt the devices&apos; power or press the reset button during this time.
-
 {{< figure src="017_Firmware_Upgrade.png" alt="Gateway firmware upgrade window" >}}
