@@ -25,6 +25,7 @@ Create a gateway by following the instructions for the [Console]({{< ref "/guide
 
 > Note: The gateway EUI can be found at the bottom of the gateway under the field &quot;NODE LORA&quot;.
 
+
 ## Configuration
 
 In a web browser, open the gateway’s configuration page by navigating to its IP Address obtained from the network it is connected to.
