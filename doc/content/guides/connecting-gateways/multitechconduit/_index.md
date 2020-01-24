@@ -23,7 +23,7 @@ This guide will help you set up the gateway to communicate over {{%tts%}}.
 
 Create a gateway by following the instructions for the [Console]({{< ref "/guides/getting-started/console#create-gateway" >}}) or the [CLI]({{< ref "/guides/getting-started/cli#create-gateway" >}}).
 
-> Note: The EUI of the gateway can be found at the bottom of the gateway under the field &quot;NODE LORA&quot;.
+> Note: The gateway EUI can be found at the bottom of the gateway under the field &quot;NODE LORA&quot;.
 
 ## Configuration
 
@@ -36,19 +36,18 @@ Click on **LoRaWAN<sup>®</sup>** in the menu on the left. It opens the Gateway&
 {{< figure src="005_Gateway_Menu_LoRaWAN.png" alt="MultiTech Conduit gateway home page" >}}
 
 Under **Network Settings**, select the mode as &quot;Packet Forwarder&quot;.
+
 {{< figure src="006_Packet_Forwarder_Gateway.png" alt="MultiTech Conduit packet forwarder settings" >}}
 
-Select your Channel Plan (EU868 in this case).
+Select the applicable Channel Plan from the dropdown (EU868 in this case).
 
 {{< figure src="007_Channel_Plan.png" alt="Channel Plan" >}}
 
 Scroll down and set the following parameters:
 
-- **Server Address**: {{%tts%}} URL provided for your deployment. For example,`thethings.example.com`
+- **Server Address**: {{%tts%}} URL provided for your deployment. For example, `thethings.example.com`
 - **Upstream Port**: UDP upstream port of the Gateway Server, typically 1700.
 - **Downstream Port**: UDP downstream port of the Gateway Server, typically 1700.
-
->Replace `thethings.example.com` with the URL of your deployment. For example, `<domain>.<region>.cloud.thethings.industries`
 
 {{< figure src="008_Server_Setup_Configuration.png" alt="Gateway server configuration" >}}
 
