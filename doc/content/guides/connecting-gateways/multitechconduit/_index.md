@@ -38,7 +38,7 @@ Click on **LoRaWAN<sup>®</sup>** in the menu on the left. It opens the Gateway&
 Under **Network Settings**, select the mode as &quot;Packet Forwarder&quot;.
 {{< figure src="006_Packet_Forwarder_Gateway.png" alt="MultiTech Conduit packet forwarder settings" >}}
 
-Select the applicable Frequency Band under the Channel Plan dropdown (EU868 in this case).
+Select the applicable Channel Plan from the dropdown (EU868 in this case).
 
 {{< figure src="007_Channel_Plan.png" alt="Channel Plan" >}}
 
