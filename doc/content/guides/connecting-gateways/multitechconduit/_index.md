@@ -25,7 +25,6 @@ Create a gateway by following the instructions for the [Console]({{< ref "/guide
 
 > Note: The gateway EUI can be found at the bottom of the gateway under the field &quot;NODE LORA&quot;.
 
-
 ## Configuration
 
 In a web browser, open the gateway’s configuration page by navigating to its IP Address obtained from the network it is connected to.
@@ -37,6 +36,7 @@ Click on **LoRaWAN<sup>®</sup>** in the menu on the left. It opens the Gateway&
 {{< figure src="005_Gateway_Menu_LoRaWAN.png" alt="MultiTech Conduit gateway home page" >}}
 
 Under **Network Settings**, select the mode as &quot;Packet Forwarder&quot;.
+
 {{< figure src="006_Packet_Forwarder_Gateway.png" alt="MultiTech Conduit packet forwarder settings" >}}
 
 Select the applicable Channel Plan from the dropdown (EU868 in this case).
