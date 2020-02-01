@@ -6,9 +6,10 @@ weight: 3
 
 [The Things Uno](https://www.thethingsnetwork.org/docs/devices/uno/) is the perfect board to start prototyping your IoT ideas or make your existing project wireless with up to 10km range by simply swapping boards.
 
-{{< figure src="001_things_uno.png" alt="The Things Uno" >}}
-
 Programming and adding The Things Uno to The Things Enterprise Stack V3 ({{%tts%}}) is almost the same as with the previous version and involves only minor modifications.
+
+<!--more-->
+{{< figure src="001_things_uno.png" alt="The Things Uno" >}}
 
 This document provides you with a stepwise process for adding a device (in the current case, The Things Uno) to {{%tts%}} server and programming it to send and receive data via {{%tts%}} using LoRaWAN<sup>®</sup>.
 
@@ -18,7 +19,7 @@ This document provides you with a stepwise process for adding a device (in the c
 
 The [Arduino Integrated Development Environment (IDE)](https://www.arduino.cc/en/main/software) is a cross-platform application (for Windows, macOS and Linux) that is used to write and upload programs to Arduino compatible boards.
 
-Let’s start by setting up the software development environment to program The Things Uno.
+Let us start by setting up the software development environment to program The Things Uno.
 
 1. [Download](https://www.arduino.cc/en/Main/Software) and install the latest Arduino Software (IDE).
 2. Navigate to **Sketch -> Include Library -> Manage Libraries** to open library manager.
@@ -27,18 +28,18 @@ Let’s start by setting up the software development environment to program The 
 
 {{< figure src="001_arduino_library.png" alt="The Things Network library" >}}
 
-> **Note:** The Arduino IDE will notify you of updates for the IDE and library automagically.
+> Note: The Arduino IDE will notify you of updates for the IDE and library automagically.
 
 ### Connecting The Things Uno to a Computer
 
 To connect your device, proceed with the following steps.
 
-1. Use a Micro-USB cable to connect The Things Uno to a USB port of your computer.
-2. In Arduino IDE, select **Tools -> Board -> Arduino Leonardo**.
+- Use a Micro-USB cable to connect The Things Uno to a USB port of your computer.
+- In Arduino IDE, select **Tools -> Board -> Arduino Leonardo**.
 
 {{< figure src="001_arduino_ide.png" alt="Arduino Leonardo Board" >}}
 
-Navigate to **Tools -> Port** and select the port that identifies as Arduino Leonardo.
+- Navigate to **Tools -> Port** and select the port that identifies as Arduino Leonardo.
 
 {{< figure src="002_arduino_ide_port.png" alt="COM Port for Arduino Leonardo Board" >}}
 
@@ -52,9 +53,9 @@ Select **File -> Examples -> TheThingsNetwork -> [DeviceInfo](https://github.com
 
 {{< figure src="001_getting_device_info.png" alt="DeviceInfo example code" >}}
 
-Replace **REPLACE_ME** in the code with **TTN_FP_EU868**.
+Replace `REPLACE_ME` in the code with `TTN_FP_EU868` (if you are using the EU868 Frequency Plan).
 
-The final code will look like the following:
+The final code should look like the following:
 
 ```bash
 #include <TheThingsNetwork.h>
@@ -92,15 +93,15 @@ The above code snippet does the following:
 - Uses [#define](https://www.arduino.cc/en/Reference/Define) to create more meaningful aliases for the [Serial](https://www.arduino.cc/en/Reference/Serial) ports for the LoRa modem, the  USB connection as well as for the frequency plan.
 - Creates an instance `ttn` of `TheThingsNetwork` class, passing the serial ports and the frequency plan as arguments to the instance.
 - Calls [begin()](https://www.arduino.cc/en/Serial/Begin) to set the data rate for both serial ports.
-- Uses [println()](https://www.arduino.cc/en/Serial/Println) to print on the Serial Monitor and calls **ttn.showStatus()** to get the device information to be used in the further steps.
+- Uses [println()](https://www.arduino.cc/en/Serial/Println) to print on the Serial Monitor and calls `ttn.showStatus()` to get the device information to be used in the further steps.
 
 In the Arduino IDE, select **Sketch -> Upload** to upload the sketch.
 
->**Note:** Uploads might fail if the Serial Monitor is open or if the IDE loses track of the port you selected in the 'Connect your Device' section. Close the Serial Monitor, check the port selection and try again. If it still fails, check Arduino Troubleshooting.
+>Note: Uploads might fail if the Serial Monitor is open or if the IDE loses track of the port you selected in the 'Connect your Device' section. When that happens, close the Serial Monitor, check the port selected and try again. If it still fails, check [Arduino Troubleshooting](https://www.arduino.cc/en/Guide/Troubleshooting).
 
 Select **Tools -> Serial Monitor** to open the [Serial Monitor](https://www.arduino.cc/en/Guide/Environment#toc12).
 
->**Note:** The serial monitor is the 'tether' between your computer and The Things Uno. It lets you send and receive text messages, and comes handy in debugging and controlling The Things Uno from a keyboard.
+>Note: The serial monitor is the 'tether' between your computer and The Things Uno. It lets you send and receive text messages, and comes handy in debugging and controlling The Things Uno from a keyboard.
 
 A print log, similar to the one shown below, gets displayed in the Serial Monitor:
 
@@ -116,7 +117,7 @@ RX Delay 1: 1000
 RX Delay 2: 2000
 ```
 
-We will use the **EUI** (which is meant to be the **Device EUI**) value to register our device.
+We will use the EUI (which is meant to be the Device EUI) value to register our device.
 
 We have now successfully connected the device, uploaded the sketch into the device and retrieved Device EUI from the logs in the Serial Monitor.
 
@@ -126,8 +127,6 @@ Devices need to be registered with an application to communicate with {{%tts%}}.
 
 Login to `https://thethings.example.com/`. You will be taken to {{%tts%}} console.
 
->Replace `https://thethings.example.com` with the URL of your deployment. For example, `<domain>.eu1.cloud.thethings.industries`.
-
 {{< figure src="001_adding_application.png" alt="{{%tts%}} console home page" >}}
 
 Click on **Go to Applications**, and then click on **+ Add Application** to reach the application registration page.
@@ -136,10 +135,10 @@ Click on **Go to Applications**, and then click on **+ Add Application** to reac
 
 Fill and set the required fields:
 
-- For **Application ID**, choose a unique ID of lower case, alphanumeric characters and nonconsecutive **-** and **_**
-- For **Application Name**, give any suitable name to the application
-- For **Description**, add anything you like
-- Leave the **checkbox** checked to link automatically.
+- For Application ID, choose a unique ID of lower case, alphanumeric characters and nonconsecutive `-` and `_`
+- For Application Name, give any suitable name to the application
+- For Description, add the desired description of the application
+- Leave the checkbox checked to link automatically.
 
 Click on **Create Application** to finish.
 
@@ -158,13 +157,13 @@ For the Activation of a device, we have the following two methods in LoRaWAN:
 1. Over The Air Activation (OTAA)
 2. Activation by personalization (ABP)
 
-Follow the below sub-sections for understanding these activation methods.
+Follow the below sub-sections to understand these activation methods.
 
 ### Activation of the device using OTAA
 
-Over-the-Air Activation (OTAA) is the preferred and most secure way to connect with The Things Network. Devices perform a join-procedure with the network, during which a dynamic `DevAddr` is assigned and security keys are negotiated with the device.
+Over-the-Air Activation (OTAA) is the preferred and most secure way to connect with {{%tts%}}. Devices perform a join-procedure with the network, during which a dynamic `DevAddr` is assigned and security keys are negotiated with the device.
 
-To get your device activated using OTAA method, do the following.
+To get your device activated using the OTAA method, do the following.
 
 #### Device Registration
 
@@ -174,20 +173,20 @@ On the application’s screen, select **Devices** from the bottom right menu.
 
 In the **Devices** section, click **+ Add Device**.
 
-- For **Device ID**, choose a unique ID of lower case, alphanumeric characters and nonconsecutive - and _
-  e.g.: **my_new_device**, **device_1**.
-- For **Device Name**, give any name you desire according to the device.
-  - For **Device Description**, add the description as desired.
-  - For **MAC Version**, select **MAC V1.0.2**
-  - For **PHY Version**, select **PHY V1.0.2 REV B**
-  - For **Frequency Plan**, select **Europe 863-870 MHz**
-  - For **Network Server Address**, put the URL of your deployment. For example: `<domain>.eu1.cloud.thethings.industries`
-  - For **Application Server Address**, put the same as the above domain.
-  - For **Activation Mode**, select Over The Air Activation (OTAA)
-  - For **Join EUI**, put any 16 character string which will work as App EUI in Arduino Sketch.
-  - For **Dev EUI**, use the Dev EUI from the device information retrieved in the **Get your Device Information** section.
+- For Device ID, choose a unique ID of lower case, alphanumeric characters and nonconsecutive `-` and `_`
+  e.g.: my_new_device, device_1.
+- For Device Name, give any name you desire according to the device.
+  - For Device Description, add the description as desired.
+  - For MAC Version, select MAC V1.0.2
+  - For PHY Version, select PHY V1.0.2 REV B
+  - For Frequency Plan, select Europe 863-870 MHz, (or the Frequency Plan you are currently in)
+  - For Network Server Address, put the URL of your deployment. For example: `https://thethings.example.com/`
+  - For Application Server Address, put the same as the domain above.
+  - For Activation Mode, select Over The Air Activation (OTAA)
+  - For Join EUI, put any 16 character string which will work as App EUI in Arduino Sketch.
+  - For Dev EUI, use the Dev EUI from the device information retrieved in the &quot;Get your Device Information section&quot;.
 
->**Note:** The frequency plan may vary based on the country you are in. Check for the appropriate frequency plan for your region [here](https://www.thethingsnetwork.org/docs/lorawan/frequency-plans.html).
+>Note: The frequency plan may vary based on the country you are in. Check for the appropriate frequency plan for your region [here](https://www.thethingsnetwork.org/docs/lorawan/frequency-plans.html).
 
 {{< figure src="001_adding_device.png" alt="Device registration page" >}}
 
@@ -195,7 +194,7 @@ In the **Devices** section, click **+ Add Device**.
 
 Click on **Create Device** to add the device.
 
-You will be redirected to the newly registered device, where you can find the generated **Keys**, which we will need in the further steps.
+You will be redirected to the newly registered device, where you can find the generated keys under the &quot;Session Information&quot; section, which we will need in the further steps.
 
 {{< figure src="003_adding_device.png" alt="Device overview page" >}}
 
@@ -203,15 +202,25 @@ You will be redirected to the newly registered device, where you can find the ge
 
 Now that you have registered the device, you can activate the connection from your device itself.
 
-Go to **File -> Examples -> TheThingsNetwork -> SendOTAA** and click on it to open.
+Go to **File -> Examples -> TheThingsNetwork -> SendOTAA** and click on it to open the SendOTAA sketch.
 
 {{< figure src="001_otaa_activation.png" alt="SendOTAA example code location" >}}
 
-Replace the **appEui** and **appKey** with the keys obtained from {{%tts%}} console.
+Replace the `appEui` and `appKey` with the keys obtained from {{%tts%}} console.
 
->**Note:** `appEui` is the `JoinEUI` in {{%tts%}} console.
+>Note: `appEui` is the `JoinEUI` in {{%tts%}} console.
 
-Replace **REPLACE_ME** with **TTN_FP_EU868**.
+Replace `REPLACE_ME` with one of the lines below, depending on the frequency plan of your device and your country.
+
+- `TTN_FP_EU868` (Europe, Middle East, Africa)
+- `TTN_FP_US915` (Americas, except Brazil)
+- `TTN_FP_AU915` (Oceania, Brazil)
+- `TTN_FP_IN865_867` (India)
+- `TTN_FP_KR920_923` (Korea)
+- `TTN_FP_AS920_923` (Japan, Singapore, Malaysia)
+- `TTN_FP_AS923_925` (Southeast Asia)
+
+>Note: The code below uses `TTN_FP_EU868`
 
 The final code should look like this:
 
@@ -263,7 +272,7 @@ void loop()
 
 Select **Sketch -> Upload** to upload the sketch and then **Tools -> Serial Monitor** to open the Serial Monitor.
 
-The Serial Monitor output would look similar to this:
+The Serial Monitor output should look similar to this:
 
 ```bash
 -- STATUS
@@ -316,40 +325,40 @@ Join accepted. Status: 00000401
 DevAddr: 27000019
 ```
 
-The Join requests and the messages on {{%tts%}} Console will look like the following:
+The Join requests and the messages on {{%tts%}} Console should look like the following:
 
 {{< figure src="001_device_activation.png" alt="Uplink messages in {{%tts%}} console" >}}
 
 Your device is now activated using OTAA Activation method and is connected to {{%tts%}}.
 
-You can proceed with the **Sending Message on Interrupt** section for learning to add a push button and send messages on pressing the button.
+You can now directly proceed with the &quot;Sending Message on Interrupt&quot; section to learn how to add a push button and send messages on pressing the button.
 
-Alternatively, you can follow the next section for activating the device using ABP method.
+Alternatively, you can follow the next section for activating the device using the ABP method.
 
 ### Activation of the device using ABP
 
 In some cases you might need to hardcode the DevAddr as well as the security keys in the device. This means activating a device by personalization (ABP). This strategy might seem simpler, because you skip the join procedure, but it has some downsides related to security.
 
-To get your device activated using ABP method, follow the steps below.
+To get your device activated using the ABP method, follow the steps below.
 
 #### Device Registration
 
-The following steps will walk you through the process of adding the device to be activated using the ABP method of activation:
+The following steps will walk you through the process of adding the device to be activated using the ABP activation method:
 
 In the application’s screen, select **Devices** from the bottom right menu.
 
 In the **Devices** box, click **+ Add Device**.
 
-- For **Device ID**, choose a unique ID of lower case, alphanumeric characters and nonconsecutive **-** and **_**.
-  - For **Device Name**, give any name you desire according to the device.
-  - For **Device Description**, add the description as desired.
-  - For **MAC Version**, select **MAC V1.0.2**
-  - For **PHY Version**, select **PHY V1.0.2 REV B**
-  - For **Frequency Plan**, select **Europe 863-870 MHz**
-  - For **Network Server Address**, put the domain of {{%tts%}}. For example; `<domain>.eu1.cloud.thethings.industries`
-  - For **Application Server Address**, put the same as the domain above.
-  - For **Activation Mode**, select **Activation By Personalization (ABP)**.
-  - For **Device Address**, you can choose any combination of 8 characters having letters and numbers.
+- For Device ID, choose a unique ID of lower case, alphanumeric characters and nonconsecutive `-` and `_`.
+  - For Device Name, give any name you desire according to the device.
+  - For Device Description, add the description as desired.
+  - For MAC Version, select MAC V1.0.2
+  - For PHY Version, select PHY V1.0.2 REV B
+  - For Frequency Plan, select Europe 863-870 MHz, (or the Frequency Plan you are currently in)
+  - For Network Server Address, put the domain of {{%tts%}}. For example, `https://thethings.example.com/`
+  - For Application Server Address, put the same as the domain above.
+  - For Activation Mode, select Activation By Personalization (ABP).
+  - For Device Address, you can choose any combination of 8 characters having letters and numbers.
 
 {{< figure src="001_adding_device.png" alt="Device registration page" >}}
 
@@ -357,7 +366,7 @@ In the **Devices** box, click **+ Add Device**.
 
 Click on **Create Device** to add the device.
 
-You will be redirected to the newly registered device, where you can find the generated **Keys** which we will need in further steps.
+You will be redirected to the newly registered device, where you can find the generated Keys under the &quot;Session Information&quot; section which we will need in further steps.
 
 {{< figure src="003_adding_device.png" alt="Device overview page" >}}
 
@@ -369,9 +378,9 @@ Go to **File -> Examples -> TheThingsNetwork -> SendABP** and click on it to ope
 
 {{< figure src="001_abp_activation.png" alt="SendABP example code location" >}}
 
-Replace **devAddr**, **nwkSKey**, and **appSKey** with the keys obtained from the device page in {{%tts%}} console.
+Replace `devAddr`, `nwkSKey`, and `appSKey` with the keys obtained from the device page in {{%tts%}} console.
 
-Replace **REPLACE_ME** with **TTN_FP_EU868**.
+Replace `REPLACE_ME` with `TTN_FP_EU868`(if you are using the EU868 Frequency Plan).
 
 The final code should look like the following:
 
@@ -426,7 +435,7 @@ Select **Sketch -> Upload** to upload the sketch and then **Tools -> Serial Moni
 
 The code will activate the device and send the status of the built-in LED to {{%tts%}} server.
 
-The Serial Monitor output would look similar to this:
+The Serial Monitor output should look similar to this:
 
 ```bash
 -- PERSONALIZE
@@ -480,7 +489,7 @@ Sending: mac tx uncnf 1 00
 Successful transmission
 ```
 
-Go to the **Data** tab of the **Devices** section in {{%tts%}} to see if the data is being sent to the server.
+Go to the **Data** tab of the **Devices** section in {{%tts%}} Console to see if the data is being sent to the server.
 
 {{< figure src="001_device_activation.png" alt="Received uplinks in The Things Stack console" >}}
 
@@ -488,7 +497,7 @@ We have completed the activation of our device using ABP activation method.
 
 ## Sending Message on Interrupt
 
-To make it interactive, let’s create a setup so that we can toggle the onboard LED and send the status to {{%tts%}} on pressing a button.
+To make it interactive, let us create a setup so that we can toggle the onboard LED and send the status to {{%tts%}} on pressing a button.
 
 The following is a simple breadboard based circuit to add a button to The Things Uno board. Make the connections to The Things Uno as per the circuit shown below:
 
@@ -531,10 +540,10 @@ static int count = 0;
 
 The above code snippet does following:
 
-- **digitalRead(4)** reads the status of the button connected on digital pin 4.
-- After each button press, **count++** will increase the count by one unit.
-- **count%2 == 0** will check whether the count value is even or odd.
-- The **payload[0]** value will be toggled according to the button press.
+- `digitalRead(4)` reads the status of the button connected on digital pin 4.
+- After each button press, `count++` will increase the count by one unit.
+- `count%2 == 0` will check whether the count value is even or odd.
+- The `payload[0]` value will be toggled according to the button press.
 
 Select **Sketch -> Upload** to upload the sketch and then **Tools -> Serial Monitor** to open the Serial Monitor.
 
@@ -549,7 +558,7 @@ Sending: mac tx uncnf 1 00
 Successful transmission
 ```
 
-Go to the **Data** section of your device page in {{%tts%}} to see the data being received in the server.
+Go to the **Data** section of your device page in {{%tts%}} Console to see the data being received in the server.
 
 {{< figure src="001_device_activation.png" alt="Received uplinks in The Things Stack console" >}}
 
@@ -557,15 +566,15 @@ We receive the status of the LED in Base64 encoded form in {{%tts%}}.
 
 ## Decoding the Message Payload
 
-What you see in the **Data** section of the device in {{%tts%}} console as below, is the raw payload in base64 format.
+What you see in the **Data** section of the device in {{%tts%}} Console as below, is the raw payload in base64 format.
 
 {{< figure src="001_uplink_message.png" alt="Received message payload in JSON format" >}}
 
-Let’s decode that into a meaningful message.
+Let us decode that into a meaningful message.
 
-Go to **Payload Formatters** tab in {{%tts%}} console.
+Go to **Payload Formatters** tab in {{%tts%}} Console.
 
-In **Formatter Type**, select **Javascript**.
+In the &quot;Formatter Type&quot; section, select Javascript.
 
 {{< figure src="001_decoding_data.png" alt="Adding payload formatter code" >}}
 
@@ -585,27 +594,27 @@ function Decoder(bytes, port) {
 
 The above code snippet does the following:
 
-- **decoded.led = bytes[0]** will decode the base64 encoding into base8 integer.
-- **return decoded** will return the decoded message.
+- `decoded.led = bytes[0]` will decode the base64 encoding into base8 integer.
+- `return decoded` will return the decoded message.
 
 Go to the **Data** tab and click on any one of the recently received packets. You should be able to see the actual LED status in it as shown below.
 
 {{< figure src="002_decoding_data.png" alt="Decoded message" >}}
 
-Once you get the LED status in its final decoded form in {{%tts%}}, you can follow the next section to add a MQTT Integration to it get the status of the LED in a custom application.
+Once you get the LED status in its final decoded form in {{%tts%}} Console, you can follow the next section to add an MQTT Integration to get the status of the LED in a custom application.
 
 ## Node-Red Integration
 
-> TODO: [MQTT Integration to third party application]
+> TODO: [MQTT Integration to a third party application]
 
 ## Troubleshooting
 
 If you cannot see the packets in {{%tts%}} server:
 
-- Check whether you have a gateway running with a frequency configured to the EU band (EU868) and the forwarding server configured to {{%tts%}}.
+- Check whether you have a gateway running with a frequency configured to the EU band (EU868) (or the relevant Frequency Band) and the forwarding server configured to {{%tts%}}.
 - Check whether the Keys in the Arduino code match the Keys in {{%tts%}} console.
-- Check whether the gateway is kept close to The Things Uno . A distance of more than 3m should be maintained between the gateway and The Things Uno.
+- Ensure that the gateway is not close to The Things Uno. A distance of more than 3m should be maintained between the gateway and The Things Uno.
 
 If the join request is not getting accepted by {{%tts%}} in case of OTAA activation method:
 
-- Ensure that The Things Uno is not immediately below the.
+- Ensure that The Things Uno is not immediately below the gateway.
