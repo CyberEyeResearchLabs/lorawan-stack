@@ -27,6 +27,26 @@ Create a gateway by following the instructions for the [Console]({{< ref "/guide
 
 ## Configuration
 
+First, you will need to generate the global_conf.json file required to add a custom channel plan in your gateway.
+
+The Gateway Configuration Server can be used to retrieve a proper `global_conf.json` configuration file for your gateway.
+
+You will need a Gateway API key with the `View gateway information` right enabled. Instructions can be found in the relevant sections of the [Console]({{< ref "/guides/getting-started/console#create-gateway" >}}) or the [CLI]({{< ref "/guides/getting-started/cli#create-gateway" >}}) getting started guides.
+
+Open command prompt in Windows or any linux terminal(eg; MobaXtreme etc.) to run the below curl command to generate global_conf.json file in your current working directory.
+
+Make sure to replace `thethings.example.com` with your server:
+
+```bash
+$ curl -XGET \
+    "https://thethings.example.com/api/v3/gcs/gateways/{GATEWAY_ID}/semtechudp/global_conf.json" \
+    -H "Authorization: Bearer {GTW_API_KEY}" > ~/global_conf.json
+```
+
+Replace the required fields in the above curl command and run it.
+
+Once global_conf.json file is generated, you will need to add this in your gateway.
+
 In a web browser, open the gateway’s configuration page by navigating to its IP Address obtained from the network it is connected to.
 
 Once logged in, you can configure the gateway to connect to {{%tts%}} by following the steps below:
@@ -39,19 +59,19 @@ Under **Network Settings**, select the mode as &quot;Packet Forwarder&quot;.
 
 {{< figure src="006_Packet_Forwarder_Gateway.png" alt="MultiTech Conduit packet forwarder settings" >}}
 
-Select the applicable Channel Plan from the dropdown (EU868 in this case).
+Follow the below steps to add the global_conf.json file to your gateway.
 
-{{< figure src="007_Channel_Plan.png" alt="Channel Plan" >}}
+On the right side of the **LoRa Packet Forwarder Configuration** you can find **Manual Configuration**. Click on it to setup the channel plan manually.
 
-Scroll down and set the following parameters:
+{{< figure src="001_Gateway_Frequency_plan_manual_config.png" alt="Switch to manual configuration mode" >}}
 
-- **Server Address**: {{%tts%}} URL provided for your deployment. For example, `thethings.example.com`
-- **Upstream Port**: UDP upstream port of the Gateway Server, typically 1700.
-- **Downstream Port**: UDP downstream port of the Gateway Server, typically 1700.
+The above step will lead you to an editor box with tag **Config**. 
 
-{{< figure src="008_Server_Setup_Configuration.png" alt="Gateway server configuration" >}}
+{{< figure src="002_Gateway_Frequency_plan_manual_config.png" alt="edit the configuration" >}}
 
-Click on **Submit**.
+Open the global_conf.json file downloaded earlier in a text editor and copy the content of it. Paste the content in the editor box of the gateway console.
+
+Click on **Submit** to save the configuration.
 
 Now, click on **Save and Restart** from the menu.
 
