@@ -32,7 +32,7 @@ The Gateway Configuration Server can be used to generate a proper `global_conf.j
 
 Open the command prompt in Windows or any Linux terminal to run a curl command (as shown below) to generate the required `global_conf.json` file in your current working directory.
 
-Make sure you replace `thethings.example.com` with your the server address:
+Make sure you replace `thethings.example.com` with your server address:
 
 ```bash
 $ curl -XGET \
