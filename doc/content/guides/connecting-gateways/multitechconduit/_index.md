@@ -52,7 +52,7 @@ Once the `global_conf.json` file is generated, you will need to add this to your
 
 {{< figure src="006_Packet_Forwarder_Gateway.png" alt="MultiTech Conduit packet forwarder settings" >}}
 
-- On the right side of the **LoRa Packet Forwarder Configuration** you can find **Manual Configuration**. Click on it to setup the channel plan manually.
+- On the right side of the &quot;LoRa Packet Forwarder Configuration&quot; section, you can find &quot;Manual Configuration &quot;. Click on it to setup the channel plan manually.
 
 {{< figure src="001_Gateway_Frequency_plan_manual_config.png" alt="Switch to manual configuration mode" >}}
 
