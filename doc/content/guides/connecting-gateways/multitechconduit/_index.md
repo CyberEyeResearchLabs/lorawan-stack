@@ -6,7 +6,7 @@ weight: 8
 
 The [MultiTech MultiConnect® Conduit™](http://www.multitech.net/developer/products/multiconnect-Conduit-platform/) is a configurable, scalable cellular communications gateway for industrial IoT applications. The technical specifications of this Conduit can be found in the software guide in the [official documentation](http://www.multitech.net/developer/products/multiconnect-conduit-platform/conduit/) page.
 
-This guide will help you set up the gateway to communicate over {{%tts%}}.
+This guide will help you set up the Multitech Conduit gateway to communicate over {{%tts%}}.
 <!--more-->
 {{< figure src="001_Multitech_Conduit_AEP.png" alt="MultiTech MultiConnect Conduit AEP Gateway" >}}
 
@@ -16,7 +16,6 @@ This guide will help you set up the gateway to communicate over {{%tts%}}.
 2. Multitech Conduit AEP Gateway connected to the internet and running the [latest firmware](http://www.multitech.net/developer/downloads/).
 
 > This article addresses the minimum configuration required to connect your Multitech Conduit AEP model to {{% tts %}}.
-
 > For the first-time hardware and software setup, you can refer to the appropriate configuration guide on the [Multitech documentation](http://www.multitech.net/developer/products/multiconnect-conduit-platform/conduit/) page.
 
 ## Registration
@@ -25,45 +24,57 @@ Create a gateway by following the instructions for the [Console]({{< ref "/guide
 
 > Note: The gateway EUI can be found at the bottom of the gateway under the field &quot;NODE LORA&quot;.
 
-## Configuration
+## Configuration using a Terminal
 
-In a web browser, open the gateway’s configuration page by navigating to its IP Address obtained from the network it is connected to.
+Firstly, you will need to generate a `global_conf.json` file required to add a custom channel plan to your gateway. Follow the steps below to generate the required json file.
 
-Once logged in, you can configure the gateway to connect to {{%tts%}} by following the steps below:
+The Gateway Configuration Server can be used to generate a proper `global_conf.json` configuration file for your gateway. You will need a Gateway API key with the `View gateway information` right enabled. The instructions for the same can be found in the relevant sections of the [Console]({{< ref "/guides/getting-started/console#create-gateway" >}}) or the [CLI]({{< ref "/guides/getting-started/cli#create-gateway" >}}) getting started guides.
 
-Click on **LoRaWAN<sup>®</sup>** in the menu on the left. It opens the Gateway&apos;s configuration page.
+Open the command prompt in Windows or any Linux terminal to run a curl command (as shown below) to generate the required `global_conf.json` file in your current working directory.
+
+Make sure you replace `thethings.example.com` with your server address:
+
+```bash
+$ curl -XGET \
+    "https://thethings.example.com/api/v3/gcs/gateways/{GATEWAY_ID}/semtechudp/global_conf.json" \
+    -H "Authorization: Bearer {GTW_API_KEY}" > ~/global_conf.json
+```
+
+> Note: Replace the required fields in the above command and run it.
+
+Once the `global_conf.json` file is generated, you will need to add this to your gateway. In a web browser, open the gateway’s configuration page by navigating to its IP Address obtained from the network it is connected to. Once logged in, you can configure the gateway to connect to {{%tts%}} by following the steps below:
+
+- Click on **LoRaWAN<sup>®</sup>** in the menu on the left. It opens the Gateway&apos;s configuration page.
 
 {{< figure src="005_Gateway_Menu_LoRaWAN.png" alt="MultiTech Conduit gateway home page" >}}
 
-Under **Network Settings**, select the mode as &quot;Packet Forwarder&quot;.
+- Under **Network Settings**, select the mode as &quot;Packet Forwarder&quot;.
 
 {{< figure src="006_Packet_Forwarder_Gateway.png" alt="MultiTech Conduit packet forwarder settings" >}}
 
-Select the applicable Channel Plan from the dropdown (EU868 in this case).
+- On the right side of the &quot;LoRa Packet Forwarder Configuration&quot; section, you can find &quot;Manual Configuration &quot;. Click on it to setup the channel plan manually.
 
-{{< figure src="007_Channel_Plan.png" alt="Channel Plan" >}}
+{{< figure src="001_Gateway_Frequency_plan_manual_config.png" alt="Switch to manual configuration mode" >}}
 
-Scroll down and set the following parameters:
+- The above step will lead you to the gateway configuration editor tagged as &quot;Config&quot;.
 
-- **Server Address**: {{%tts%}} URL provided for your deployment. For example, `thethings.example.com`
-- **Upstream Port**: UDP upstream port of the Gateway Server, typically 1700.
-- **Downstream Port**: UDP downstream port of the Gateway Server, typically 1700.
+{{< figure src="002_Gateway_Frequency_plan_manual_config.png" alt="edit the configuration" >}}
 
-{{< figure src="008_Server_Setup_Configuration.png" alt="Gateway server configuration" >}}
+- Copy the contents of the `global_conf.json` file downloaded earlier and paste them in the gateway console configuration editor.
 
-Click on **Submit**.
+- Click on **Submit** to save the configuration.
 
-Now, click on **Save and Restart** from the menu.
+- Now, click on **Save and Restart** from the menu.
 
 {{< figure src="011_Gateway_Menu_Save-And-Restart.png" alt="Saving the Network Interfaces Configuration" >}}
 
-You will be prompted to confirm the restart. Choose **OK** to proceed.
+- You will be prompted to confirm the restart. Choose **OK** to proceed.
 
 {{< figure src="012_System_Confirmation_Prompt.png" alt="Configuration restart prompt" >}}
 
-This will apply the setting and reboot the gateway. If all the steps have been followed correctly, your gateway will now connect to {{%tts%}}.
+This will apply the custom settings and reboot the gateway. If all the steps have been followed correctly, your gateway will now connect to {{%tts%}}.
 
->To know more about other features of the MultiTech Conduit gateway, you can refer to the **mPower Edge AEP software guide** on the [Multitech Website](http://www.multitech.net/developer/products/multiconnect-conduit-platform/conduit/).
+> To know more about other features of the MultiTech Conduit gateway, you can refer to the **mPower Edge AEP software guide** on the [Multitech Website](http://www.multitech.net/developer/products/multiconnect-conduit-platform/conduit/).
 
 ## Troubleshooting
 
@@ -97,9 +108,11 @@ Do the following to upgrade the firmware on your device:
   - Click on **Browse** to find where the firmware file resides that you want to apply.
   - Select the file and click on **Open**. The file name appears next to the **Choose Firmware Upgrade File** button. Make sure you select the correct BIN file; otherwise, your device can become inoperable.
 - Click on **Start Upgrade**.
+
+{{< figure src="017_Firmware_Upgrade.png" alt="Gateway firmware upgrade window" >}}
+
 - A message about the time needed to upgrade appears. Click on **OK**.
 - A progress bar appears indicating the status of the upgrade. When the upgrade is completed, your device reboots.
 - After the firmware upgrade is completed, verify your configuration to ensure that it is same as what you expected.
 
 > Note: The new firmware is written into flash memory. It may take up to 10 minutes to upgrade the firmware. Do not interrupt the devices&apos; power or press the reset button during this time.
-{{< figure src="017_Firmware_Upgrade.png" alt="Gateway firmware upgrade window" >}}
