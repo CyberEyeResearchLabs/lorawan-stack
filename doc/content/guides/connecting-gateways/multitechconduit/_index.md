@@ -28,6 +28,8 @@ Create a gateway by following the instructions for the [Console]({{< ref "/guide
 
 Firstly, you will need to generate a `global_conf.json` file required to add a custom channel plan to your gateway. Follow the steps below to generate the required json file.
 
+> **Warning:** The manual configuration of the frequency plan (required to make it work on The Things (Enterprise) Stack) still needs to be validated for frequency bands other than `EU`, `AU`,`US` and `IN` as it may result in a mismatch of the frequencies used.
+
 The Gateway Configuration Server can be used to generate a proper `global_conf.json` configuration file for your gateway. You will need a Gateway API key with the `View gateway information` right enabled. The instructions for the same can be found in the relevant sections of the [Console]({{< ref "/guides/getting-started/console#create-gateway" >}}) or the [CLI]({{< ref "/guides/getting-started/cli#create-gateway" >}}) getting started guides.
 
 Open the command prompt in Windows or any Linux terminal to run a curl command (as shown below) to generate the required `global_conf.json` file in your current working directory.
@@ -61,6 +63,8 @@ Once the `global_conf.json` file is generated, you will need to add this to your
 {{< figure src="002_Gateway_Frequency_plan_manual_config.png" alt="edit the configuration" >}}
 
 - Copy the contents of the `global_conf.json` file downloaded earlier and paste them in the gateway console configuration editor.
+
+- Once pasted, modify the value of `clksrc` to set it to `0`.
 
 - Click on **Submit** to save the configuration.
 
