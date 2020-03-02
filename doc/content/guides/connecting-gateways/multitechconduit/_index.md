@@ -28,7 +28,7 @@ Create a gateway by following the instructions for the [Console]({{< ref "/guide
 
 Firstly, you will need to generate a `global_conf.json` file required to add a custom channel plan to your gateway. Follow the steps below to generate the required json file.
 
-> **Warning:** The manual configuration of the frequency plan (required to make it work on The Things (Enterprise) Stack) still needs to be validated for frequency bands other than `EU`, `AU`,`US` and `IN` as it may result in a mismatch of the frequencies used.
+> **Warning:** The manual configuration of the frequency plan - required to make it work on the The Things (Enterprise) Stack - may result in a mismatch for some of the frequency bands used for the Multitech Gateway.
 
 The Gateway Configuration Server can be used to generate a proper `global_conf.json` configuration file for your gateway. You will need a Gateway API key with the `View gateway information` right enabled. The instructions for the same can be found in the relevant sections of the [Console]({{< ref "/guides/getting-started/console#create-gateway" >}}) or the [CLI]({{< ref "/guides/getting-started/cli#create-gateway" >}}) getting started guides.
 
