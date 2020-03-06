@@ -15,6 +15,9 @@ This document provides you with a stepwise process for adding a device (in the c
 
 ## Prerequisites
 
+- Knowledge of Arduino IDE and related concepts
+- Understanding of basic electronic concepts
+
 ### Setting up the Arduino IDE
 
 The [Arduino Integrated Development Environment (IDE)](https://www.arduino.cc/en/main/software) is a cross-platform application (for Windows, macOS and Linux) that is used to write and upload programs to Arduino compatible boards.
@@ -135,10 +138,12 @@ Click on **Go to Applications**, and then click on **+ Add Application** to reac
 
 Fill and set the required fields:
 
-- For Application ID, choose a unique ID of lower case, alphanumeric characters and nonconsecutive `-` and `_`
-- For Application Name, give any suitable name to the application
-- For Description, add the desired description of the application
-- Leave the checkbox checked to link automatically.
+- For `Application ID`, choose a unique ID by following the guidelines below:
+  - Lower case, alphanumeric characters and nonconsecutive ‘ - ’ 
+  - Maximum 100 characters are allowed
+- For `Application Name`, give any suitable name to the application
+- For `Description`, add the desired description of the application
+- For `Linking`, Leave the checkbox checked to link the application automatically to the network server,
 
 Click on **Create Application** to finish.
 
@@ -175,18 +180,20 @@ In the **Devices** section, click **+ Add Device**.
 
 - For Device ID, choose a unique ID of lower case, alphanumeric characters and nonconsecutive `-` and `_`
   e.g.: my_new_device, device_1.
-- For Device Name, give any name you desire according to the device.
-  - For Device Description, add the description as desired.
-  - For MAC Version, select MAC V1.0.2
-  - For PHY Version, select PHY V1.0.2 REV B
-  - For Frequency Plan, select Europe 863-870 MHz, (or the Frequency Plan you are currently in)
-  - For Network Server Address, put the URL of your deployment. For example: `https://thethings.example.com/`
-  - For Application Server Address, put the same as the domain above.
-  - For Activation Mode, select Over The Air Activation (OTAA)
-  - For Join EUI, put any 16 character string which will work as App EUI in Arduino Sketch.
-  - For Dev EUI, use the Dev EUI from the device information retrieved in the &quot;Get your Device Information section&quot;.
+- For `Device Name`, give any name you desire according to the device.
+- For `Device Description`, add the description as desired.
+- For `MAC Version`, select MAC V1.0.2
+- For `PHY Version`, select PHY V1.0.2 REV B
+- For `Frequency Plan`, select Europe 863-870 MHz, (or the Frequency Plan you are currently in)
+- For `Network Server Address`, put the URL of your deployment. For example: `https://thethings.example.com/`
+- For `Application Server Address`, put the same as the domain above.
+- For `Activation Mode`, select Over The Air Activation (OTAA)
+- For `Join EUI`, put any 16 character string which will work as App EUI in Arduino Sketch.
+- For `Dev EUI`, use the Dev EUI from the device information retrieved in the `Get your Device Information` section.
+- For `External Join Server`, uncheck the box.
 
->Note: The frequency plan may vary based on the country you are in. Check for the appropriate frequency plan for your region [here](https://www.thethingsnetwork.org/docs/lorawan/frequency-plans.html).
+>Note: The `Frequency Plan` may vary based on the country you are in. Check for the appropriate Frequency Plan for your region [here](https://www.thethingsnetwork.org/docs/lorawan/frequency-plans.html).
+>Also, if the `External Join Server` is not disabled, you will not get `AppKey` in the device overview page.
 
 {{< figure src="001_adding_device.png" alt="Device registration page" >}}
 
@@ -349,16 +356,16 @@ In the application’s screen, select **Devices** from the bottom right menu.
 
 In the **Devices** box, click **+ Add Device**.
 
-- For Device ID, choose a unique ID of lower case, alphanumeric characters and nonconsecutive `-` and `_`.
-  - For Device Name, give any name you desire according to the device.
-  - For Device Description, add the description as desired.
-  - For MAC Version, select MAC V1.0.2
-  - For PHY Version, select PHY V1.0.2 REV B
-  - For Frequency Plan, select Europe 863-870 MHz, (or the Frequency Plan you are currently in)
-  - For Network Server Address, put the domain of {{%tts%}}. For example, `https://thethings.example.com/`
-  - For Application Server Address, put the same as the domain above.
-  - For Activation Mode, select Activation By Personalization (ABP).
-  - For Device Address, you can choose any combination of 8 characters having letters and numbers.
+- For `Device ID`, choose a unique ID of lower case, alphanumeric characters and nonconsecutive `-` and `_`.
+- For `Device Name`, give any name you desire according to the device.
+- For `Device Description`, add the description as desired.
+- For `MAC Version`, select MAC V1.0.2
+- For `PHY Version`, select PHY V1.0.2 REV B
+- For `Frequency Plan`, select Europe 863-870 MHz, (or the Frequency Plan you are currently in)
+- For `Network Server Address`, put the domain of {{%tts%}}. For example, `https://thethings.example.com/`
+- For `Application Server Address`, put the same as the domain above.
+- For `Activation Mode`, select Activation By Personalization (ABP).
+- For `Device Address`, you can choose any combination of 8 characters having letters and numbers.
 
 {{< figure src="001_adding_device.png" alt="Device registration page" >}}
 
@@ -380,7 +387,17 @@ Go to **File -> Examples -> TheThingsNetwork -> SendABP** and click on it to ope
 
 Replace `devAddr`, `nwkSKey`, and `appSKey` with the keys obtained from the device page in {{%tts%}} console.
 
-Replace `REPLACE_ME` with `TTN_FP_EU868`(if you are using the EU868 Frequency Plan).
+Replace `REPLACE_ME` with one of the lines below, depending on the frequency plan of your device and your country.
+
+- `TTN_FP_EU868` (Europe, Middle East, Africa)
+- `TTN_FP_US915` (Americas, except Brazil)
+- `TTN_FP_AU915` (Oceania, Brazil)
+- `TTN_FP_IN865_867` (India)
+- `TTN_FP_KR920_923` (Korea)
+- `TTN_FP_AS920_923` (Japan, Singapore, Malaysia)
+- `TTN_FP_AS923_925` (Southeast Asia)
+
+>Note: The code below uses `TTN_FP_EU868`
 
 The final code should look like the following:
 
@@ -515,26 +532,24 @@ Replace the **loop()** section of the code snippet used for device activation wi
 
 ```bash
 void loop(){
-static int count = 0;
- byte payload[1];
+  static int count = 0;
+  byte payload[1];
 
- if ( count % 2 == 0) {
- payload[0] = 1;
- digitalWrite(LED_BUILTIN, HIGH);
- }
- else {
- payload[0] = 0;
- digitalWrite(LED_BUILTIN, LOW);
- }
- if (digitalRead(4) == HIGH) {
- count ++;
- Serial.println(payload[0]);
- ttn.sendBytes(payload, sizeof(payload));
- delay(5000);
- }
- else {
- ;
- }
+  if (digitalRead(4) == HIGH) {
+    count ++;
+    Serial.println(payload[0]);
+    ttn.sendBytes(payload, sizeof(payload));
+    delay(5000);
+  }
+
+  if ( count % 2 == 0) {
+    payload[0] = 1;
+    digitalWrite(LED_BUILTIN, HIGH);
+  }
+  else {
+    payload[0] = 0;
+    digitalWrite(LED_BUILTIN, LOW);
+  }
 }
 ```
 
@@ -574,11 +589,11 @@ Let us decode that into a meaningful message.
 
 Go to **Payload Formatters** tab in {{%tts%}} Console.
 
-In the &quot;Formatter Type&quot; section, select Javascript.
+In the `Formatter Type` section, select `Javascript`.
 
 {{< figure src="001_decoding_data.png" alt="Adding payload formatter code" >}}
 
-In the **Formatter Parameter** box, paste the following code snippet:
+In the `Formatter Parameter` box, paste the following code snippet:
 
 ```bash
 function Decoder(bytes, port) {
