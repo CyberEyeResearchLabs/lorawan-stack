@@ -1,45 +1,52 @@
 ---
-title: "Device Activation"
+title: "Activation"
 description: ""
-weight: 6
+weight: 3
 ---
 
-All the communication in LoRaWAN is done with a dynamic 32bit device address (DevAddr) of which 7 bits are fixed for The Things Stack, leaving 25 bits that can be assigned to individual devices, through a procedure called **Activation**.
+Activating the device using different activation methods
+
+<!--more-->
+
+## Step by step
+
+All the communication in LoRaWAN is done with a dynamic 32bit device address (DevAddr) of which 7 bits are fixed for {{%tts%}}, leaving 25 bits that can be assigned to individual devices, through a procedure called **Activation**.
 
 For the Activation of a device, we have the following two methods in LoRaWAN:
+
 1. Over The Air Activation (OTAA)
 2. Activation by personalization (ABP)
 
-Follow the below sub-sections for understanding these activation methods.
+Follow the below sub-sections to understand these activation methods.
 
-## 1. Activation of the device using OTAA
+### Activation of the device using OTAA
 
-Over-the-Air Activation (OTAA) is the preferred and most secure way to connect with The Things Network. Devices perform a join-procedure with the network, during which a dynamic DevAddr is assigned and security keys are negotiated with the device.
+Over-the-Air Activation (OTAA) is the preferred and most secure way to connect with {{%tts%}}. Devices perform a join-procedure with the network, during which a dynamic `DevAddr` is assigned and security keys are negotiated with the device.
 
-To get your device activated using OTAA method, follow the following steps.
+To get your device activated using the OTAA method, do the following:
 
-### 1.1. Device Registration
-
-You are now ready to register your device to the application for activating it using the OTAA method.
+#### Device Registration
 
 On the application’s screen, select **Devices** from the bottom right menu.
 
-In the Devices section, click **+ Add Device**.
+In the **Devices** section, click **+ Add Device**.
 
-  - For **Device ID**, choose a unique ID of lower case, alphanumeric characters and nonconsecutive - and _.
-  eg :** my_new_device**, **device_1**.
-  - For** Device Name**, give any name you desire according to the device.
-  - For** Device Description**, add the description as desired.
-  - For** MAC Version**, select **MAC V1.0.2**
-  - For **PHY Version**, select** PHY V1.0.2 REV B**
-  - For **Frequency Plan**, select Europe 863-870 MHz
-  - For **Network Server Address**, put the URL of your deployment. For example; <domain>.eu1.cloud.thethings.industries
-  - For **Application Server Address**, put the same as the above domain.
-  - For **Activation Mode**, select Over The Air Activation (OTAA)
-  - For** Join EUI**, put any 16 character string which will work as App EUI in Arduino Sketch.
-  - For **Dev EUI**, use the Dev EUI from the device information retrieved in the **Get your Device Information **section.
- 
->**Note:** The frequency plan may vary based on the country you are in. Check for the appropriate frequency plan for your region [here](https://www.thethingsnetwork.org/docs/lorawan/frequency-plans.html).
+- For Device ID, choose a unique ID of lower case, alphanumeric characters and nonconsecutive `-` and `_`
+  e.g.: my_new_device, device_1.
+- For `Device Name`, give any name you desire according to the device.
+- For `Device Description`, add the description as desired.
+- For `MAC Version`, select MAC V1.0.2
+- For `PHY Version`, select PHY V1.0.2 REV B
+- For `Frequency Plan`, select Europe 863-870 MHz, (or the Frequency Plan you are currently in)
+- For `Network Server Address`, put the URL of your deployment. For example: `https://thethings.example.com/`
+- For `Application Server Address`, put the same as the domain above.
+- For `Activation Mode`, select Over The Air Activation (OTAA)
+- For `Join EUI`, put any 16 character string which will work as App EUI in Arduino Sketch.
+- For `Dev EUI`, use the Dev EUI from the device information retrieved in the `Get your Device Information` section.
+- For `External Join Server`, uncheck the box.
+
+>Note: The `Frequency Plan` may vary based on the country you are in. Check for the appropriate Frequency Plan for your region [here](https://www.thethingsnetwork.org/docs/lorawan/frequency-plans.html).
+>Also, if the `External Join Server` is not disabled, you will not get `AppKey` in the device overview page.
 
 {{< figure src="001_adding_device.png" alt="Device registration page" >}}
 
@@ -47,23 +54,33 @@ In the Devices section, click **+ Add Device**.
 
 Click on **Create Device** to add the device.
 
-You will be redirected to the newly registered device, where you can find the generated **Keys**, which we will need in the further steps.
+You will be redirected to the newly registered device, where you can find the generated keys under the **Session Information** section, which we will need in the further steps.
 
 {{< figure src="003_adding_device.png" alt="Device overview page" >}}
 
-### 1.2. Device Activation
+#### Device Activation
 
 Now that you have registered the device, you can activate the connection from your device itself.
 
-Go to **File -> Examples -> TheThingsNetwork -> SendOTAA** and click on it to open.
+Go to **File -> Examples -> TheThingsNetwork -> SendOTAA** and click on it to open the `SendOTAA` sketch.
 
 {{< figure src="001_otaa_activation.png" alt="SendOTAA example code location" >}}
 
-Replace the **appEui** and **appKey** with the keys obtained from The Things Stack console.
- 
->**Note:** appEui is the **JoinEUI** in The Things Stack console.
+Replace the `appEui` and `appKey` with the keys obtained from {{%tts%}} console.
 
-Replace **REPLACE_ME** with **TTN_FP_EU868**.
+>Note: `appEui` is the `JoinEUI` in {{%tts%}} console.
+
+Replace `REPLACE_ME` with one of the lines below, depending on the frequency plan of your device and your country.
+
+- `TTN_FP_EU868` (Europe, Middle East, Africa)
+- `TTN_FP_US915` (Americas, except Brazil)
+- `TTN_FP_AU915` (Oceania, Brazil)
+- `TTN_FP_IN865_867` (India)
+- `TTN_FP_KR920_923` (Korea)
+- `TTN_FP_AS920_923` (Japan, Singapore, Malaysia)
+- `TTN_FP_AS923_925` (Southeast Asia)
+
+>Note: The code below uses `TTN_FP_EU868`
 
 The final code should look like this:
 
@@ -113,9 +130,9 @@ void loop()
 }
 ```
 
-Select **Sketch -> Upload** or **Ctrl+U (in Windows)** / **⌘+U (in Mac OS)** to upload the sketch and then **Tools -> Serial Monitor** or **Ctrl+Shift+M (in Windows)** / **⌘+Shift+M (in Mac OS)** to open the Serial Monitor.
+Select **Sketch -> Upload** to upload the sketch and then **Tools -> Serial Monitor** to open the Serial Monitor.
 
-You should see something like the following:
+The Serial Monitor output should look similar to this:
 
 ```bash
 -- STATUS
@@ -134,7 +151,7 @@ Sending: mac set adr off
 Sending: mac set deveui 0004A307771BB05B
 Sending: mac set appeui B07A78992F8789F8
 Sending: mac set appkey D708031B2BBAB3345645B8E11DE5E18
-Sending: mac save 
+Sending: mac save
 Sending: mac set rx2 3 869525000
 Sending: mac set ch drrange 1 0 6
 Sending: mac set ch dcycle 0 799
@@ -163,45 +180,43 @@ Sending: mac set ch status 7 on
 Sending: mac set pwridx 1
 Sending: mac set retx 7
 Sending: mac set dr 5
-Sending: mac join otaa 
+Sending: mac join otaa
 Join accepted. Status: 00000401
 DevAddr: 27000019
 ```
 
-The Join requests and the messages on The Things Stack Console will look like the following:
+The Join requests and the messages on {{%tts%}} Console should look like the following:
 
-{{< figure src="001_device_activation.png" alt="Uplink messages in The Things Stack console" >}}
+{{< figure src="001_device_activation.png" alt="Uplink messages in {{%tts%}} console" >}}
 
-Your device is now activated using OTAA Activation method and is connected to The Things Stack.
+Your device is now activated using OTAA Activation method and is connected to {{%tts%}}.
 
-You can proceed with the **Sending Message on Interrupt** section for learning to add a push button and send messages on pressing the button.
+You can now directly proceed with the **Sending Message on Interrupt** section to learn how to add a push button and send messages on pressing the button.
 
-Or, you can follow the next section for activation of the device using ABP method.
+Alternatively, you can follow the next section for activating the device using the ABP method.
 
-## 2. Activation of the device using ABP
+### Activation of the device using ABP
 
 In some cases you might need to hardcode the DevAddr as well as the security keys in the device. This means activating a device by personalization (ABP). This strategy might seem simpler, because you skip the join procedure, but it has some downsides related to security.
 
-To get your device activated using ABP method, follow the steps below.
+To get your device activated using the ABP method, follow the steps below:
 
-### 2.1. Device Registration
-
-The following steps will walk you through the process of adding the device to be activated using the ABP method of activation:
+#### Device Registration
 
 In the application’s screen, select **Devices** from the bottom right menu.
 
 In the **Devices** box, click **+ Add Device**.
 
-  - For **Device ID**, choose a unique ID of lower case, alphanumeric characters and nonconsecutive **-** and **_**.
-  - For **Device Name**, give any name you desire according to the device.
-  - For **Device Description**, add the description as desired.
-  - For **MAC Version**, select **MAC V1.0.2**
-  - For **PHY Version**, select **PHY V1.0.2 REV B**
-  - For **Frequency Plan**, select **Europe 863-870 MHz**
-  - For **Network Server Address**, put the domain of The Things Stack. For example; **domain.eu1.cloud.thethings.industries**
-  - For **Application Server Address**, put the same as the domain above.
-  - For **Activation Mode**, select **Activation By Personalization (ABP)**.
-  - For **Device Address**, you can choose any combination of 8 characters having letters and numbers.
+- For `Device ID`, choose a unique ID of lower case, alphanumeric characters and nonconsecutive `-` and `_`.
+- For `Device Name`, give any name you desire according to the device.
+- For `Device Description`, add the description as desired.
+- For `MAC Version`, select MAC V1.0.2
+- For `PHY Version`, select PHY V1.0.2 REV B
+- For `Frequency Plan`, select Europe 863-870 MHz, (or the Frequency Plan you are currently in)
+- For `Network Server Address`, put the domain of {{%tts%}}. For example, `https://thethings.example.com/`
+- For `Application Server Address`, put the same as the domain above.
+- For `Activation Mode`, select Activation By Personalization (ABP).
+- For `Device Address`, you can choose any combination of 8 characters having letters and numbers.
 
 {{< figure src="001_adding_device.png" alt="Device registration page" >}}
 
@@ -209,11 +224,11 @@ In the **Devices** box, click **+ Add Device**.
 
 Click on **Create Device** to add the device.
 
-You will be redirected to the newly registered device, where you can find the generated **Keys** which we will need in further steps.
+You will be redirected to the newly registered device, where you can find the generated Keys under the **Session Information** section which we will need in further steps.
 
 {{< figure src="003_adding_device.png" alt="Device overview page" >}}
 
-### 2.2. Device Activation
+#### Device Activation
 
 Now that you have registered the device, you can activate the connection from your device itself.
 
@@ -221,9 +236,22 @@ Go to **File -> Examples -> TheThingsNetwork -> SendABP** and click on it to ope
 
 {{< figure src="001_abp_activation.png" alt="SendABP example code location" >}}
 
-Replace **devAddr**, **nwkSKey**, and **appSKey** with the keys obtained from the device page in The Things Stack console.
+Replace `devAddr`, `nwkSKey`, and `appSKey` with the keys obtained from the device page in {{%tts%}} console.
 
-Replace **REPLACE_ME** with **TTN_FP_EU868**.
+> Note: `nwkSKey` can be replaced with the `NwkSEncKey` from {{%tts%}} console.
+
+Replace `REPLACE_ME` with one of the lines below, depending on the frequency plan of your device and your country.
+
+- `TTN_FP_EU868` (Europe, Middle East, Africa)
+- `TTN_FP_US915` (Americas, except Brazil)
+- `TTN_FP_AU915` (Oceania, Brazil)
+- `TTN_FP_IN865_867` (India)
+- `TTN_FP_KR920_923` (Korea)
+- `TTN_FP_AS920_923` (Japan, Singapore, Malaysia)
+- `TTN_FP_AS923_925` (Southeast Asia)
+
+>Note: The code below uses `TTN_FP_EU868`
+
 The final code should look like the following:
 
 ```bash
@@ -273,11 +301,11 @@ void loop()
 }
 ```
 
-Select **Sketch -> Upload **or** Ctrl+U (in Windows) / ⌘+U (in MAC OS)** to upload the sketch and then **Tools -> Serial Monitor** or **Ctrl+Shift+M (in Windows) / ⌘+Shift+M (in MAC OS)** to open the Serial Monitor. 	
+Select **Sketch -> Upload** to upload the sketch and then **Tools -> Serial Monitor** to open the Serial Monitor.
 
-The code will activate the device and send the status of the built-in LED to The Things Stack server.
+The code will activate the device and send the status of the built-in LED to {{%tts%}} server.
 
-The Serial Monitor will show information as follows:
+The Serial Monitor output should look similar to this:
 
 ```bash
 -- PERSONALIZE
@@ -316,7 +344,7 @@ Sending: mac set ch status 7 on
 Sending: mac set pwridx 1
 Sending: mac set retx 7
 Sending: mac set dr 5
-Sending: mac join abp 
+Sending: mac join abp
 Personalize accepted. Status: 00000001
 -- STATUS
 EUI: 0004A30B001BC88B
@@ -331,10 +359,8 @@ Sending: mac tx uncnf 1 00
 Successful transmission
 ```
 
-Go to the **Data** tab of the **Devices** section in The Things Stack to see if the data is being sent to the server. 
+Go to the **Data** tab of the **Devices** section in {{%tts%}} Console to see if the data is being sent to the server.
 
 {{< figure src="001_device_activation.png" alt="Received uplinks in The Things Stack console" >}}
 
 We have completed the activation of our device using ABP activation method.
-
-Follow the next section for integrating a push button to your device and sending the message to The Things Stack.
