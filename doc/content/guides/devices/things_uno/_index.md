@@ -20,12 +20,12 @@ This document provides you with a stepwise process for adding a device (in the c
 
 ### Setting up the Arduino IDE
 
-The [Arduino Integrated Development Environment (IDE)](https://www.arduino.cc/en/main/software) is a cross-platform application (for Windows, macOS and Linux) that is used to write and upload programs to Arduino compatible boards.
+The [Arduino Integrated Development Environment (IDE)](https://www.arduino.cc/en/main/software) is a cross-platform application (for Windows, macOS and Linux) used to write and upload programs to Arduino compatible boards.
 
 Let us start by setting up the software development environment to program The Things Uno.
 
 1. [Download](https://www.arduino.cc/en/Main/Software) and install the latest Arduino Software (IDE).
-2. Navigate to **Sketch -> Include Library -> Manage Libraries** to open library manager.
+2. Navigate to **Sketch -> Include Library -> Manage Libraries** to open the library manager.
 3. Search for **TheThingsNetwork** and click on the result to select it.
 4. Click on the **Install** button to install it.
 
@@ -56,7 +56,17 @@ Select **File -> Examples -> TheThingsNetwork -> [DeviceInfo](https://github.com
 
 {{< figure src="001_getting_device_info.png" alt="DeviceInfo example code" >}}
 
-Replace `REPLACE_ME` in the code with `TTN_FP_EU868` (if you are using the EU868 Frequency Plan).
+Replace `REPLACE_ME` with one of the lines below, depending on the frequency plan of your device and your country.
+
+- `TTN_FP_EU868` (Europe, Middle East, Africa)
+- `TTN_FP_US915` (Americas, except Brazil)
+- `TTN_FP_AU915` (Oceania, Brazil)
+- `TTN_FP_IN865_867` (India)
+- `TTN_FP_KR920_923` (Korea)
+- `TTN_FP_AS920_923` (Japan, Singapore, Malaysia)
+- `TTN_FP_AS923_925` (Southeast Asia)
+
+>Note: The code below uses `TTN_FP_EU868`
 
 The final code should look like the following:
 
@@ -139,7 +149,7 @@ Click on **Go to Applications**, and then click on **+ Add Application** to reac
 Fill and set the required fields:
 
 - For `Application ID`, choose a unique ID by following the guidelines below:
-  - Lower case, alphanumeric characters and nonconsecutive ‘ - ’ 
+  - Lower case, alphanumeric characters and nonconsecutive `-`
   - Maximum 100 characters are allowed
 - For `Application Name`, give any suitable name to the application
 - For `Description`, add the desired description of the application
