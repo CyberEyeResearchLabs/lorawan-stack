@@ -4,11 +4,16 @@ description: ""
 weight: 1
 ---
 
+Learn how to setup Arduino IDE
+
+<!--more-->
+
+## The Things Uno
+
 [The Things Uno](https://www.thethingsnetwork.org/docs/devices/uno/) is the perfect board to start prototyping your IoT ideas or make your existing project wireless with up to 10km range by simply swapping boards.
 
 Programming and adding The Things Uno to The Things Enterprise Stack V3 ({{%tts%}}) is almost the same as with the previous version and involves only minor modifications.
 
-<!--more-->
 {{< figure src="001_things_uno.png" alt="The Things Uno" >}}
 
 ## Prerequisites

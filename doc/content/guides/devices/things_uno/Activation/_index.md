@@ -4,7 +4,11 @@ description: ""
 weight: 3
 ---
 
-## Activation
+Learn to use different activation methods
+
+<!--more-->
+
+## Step by step
 
 All the communication in LoRaWAN is done with a dynamic 32bit device address (DevAddr) of which 7 bits are fixed for {{%tts%}}, leaving 25 bits that can be assigned to individual devices, through a procedure called **Activation**.
 

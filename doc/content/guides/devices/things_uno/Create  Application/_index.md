@@ -1,10 +1,14 @@
 ---
-title: "Create application"
+title: "Create Application"
 description: ""
 weight: 2
 ---
 
-## Add an Application to {{%tts%}}
+Learn how to create an application
+
+<!--more-->
+
+## Step by step
 
 Devices need to be registered with an application to communicate with {{%tts%}}. Let’s add one.
 

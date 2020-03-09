@@ -1,8 +1,12 @@
 ---
 title: "Troubleshooting"
 description: ""
-weight: 6
+weight: 7
 ---
+
+Learn how to resolve the problems occuring while hands-on
+
+<!--more-->
 
 ## Troubleshooting
 

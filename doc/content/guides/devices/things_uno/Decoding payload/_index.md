@@ -4,7 +4,12 @@ description: ""
 weight: 5
 ---
 
-## Decoding the Message Payload
+Learn how to decode the payload in {{%tts%}}
+
+<!--more-->
+
+
+## Step by step
 
 What you see in the **Data** section of the device in {{%tts%}} Console as below, is the raw payload in base64 format.
 
@@ -42,5 +47,3 @@ Go to the **Data** tab and click on any one of the recently received packets. Yo
 {{< figure src="002_decoding_data.png" alt="Decoded message" >}}
 
 Once you get the LED status in its final decoded form in {{%tts%}} Console, you can follow the next section to add an MQTT Integration to get the status of the LED in a custom application.
-
-## Node-Red Integration

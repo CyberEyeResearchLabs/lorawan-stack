@@ -4,7 +4,11 @@ description: ""
 weight: 4
 ---
 
-## Sending Message on Interrupt
+Learn how to send a LoRaWAN packet on interrupt
+
+<!--more-->
+
+## Step by step
 
 To make it interactive, let us create a setup so that we can toggle the onboard LED and send the status to {{%tts%}} on pressing a button.
 
@@ -27,13 +31,6 @@ void loop(){
   static int count = 0;
   byte payload[1];
 
-  if (digitalRead(4) == HIGH) {
-    count ++;
-    Serial.println(payload[0]);
-    ttn.sendBytes(payload, sizeof(payload));
-    delay(5000);
-  }
-
   if ( count % 2 == 0) {
     payload[0] = 1;
     digitalWrite(LED_BUILTIN, HIGH);
@@ -41,6 +38,13 @@ void loop(){
   else {
     payload[0] = 0;
     digitalWrite(LED_BUILTIN, LOW);
+  }
+
+  if (digitalRead(4) == HIGH) {
+    count ++;
+    Serial.println(payload[0]);
+    ttn.sendBytes(payload, sizeof(payload));
+    delay(5000);
   }
 }
 ```
