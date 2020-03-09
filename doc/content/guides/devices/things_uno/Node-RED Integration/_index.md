@@ -4,7 +4,7 @@ description: ""
 weight: 6
 ---
 
-Learn how to integrate Node-RED with {{%tts%}}
+Integrating Node-RED with {{%tts%}}
 
 <!--more-->
 

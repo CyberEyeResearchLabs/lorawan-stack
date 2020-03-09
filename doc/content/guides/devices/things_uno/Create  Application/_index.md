@@ -4,7 +4,7 @@ description: ""
 weight: 2
 ---
 
-Learn how to create an application
+Creating an application for communication with {{%tts%}}
 
 <!--more-->
 

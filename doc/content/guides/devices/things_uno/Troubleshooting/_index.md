@@ -4,7 +4,7 @@ description: ""
 weight: 7
 ---
 
-Learn how to resolve the problems occuring while hands-on
+Resolving common issues.
 
 <!--more-->
 

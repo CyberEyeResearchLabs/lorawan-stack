@@ -4,7 +4,7 @@ description: ""
 weight: 1
 ---
 
-Learn how to setup Arduino IDE
+Setting up Arduino IDE for the Things Uno.
 
 <!--more-->
 
@@ -19,7 +19,7 @@ Programming and adding The Things Uno to The Things Enterprise Stack V3 ({{%tts%
 ## Prerequisites
 
 - Knowledge of Arduino IDE and related concepts
-- Understanding of basic electronic concepts
+- Understanding of basic electronics concepts
 
 ### Setting up the Arduino IDE
 

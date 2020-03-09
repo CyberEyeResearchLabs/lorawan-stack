@@ -4,7 +4,7 @@ description: ""
 weight: 4
 ---
 
-Learn how to send a LoRaWAN packet on interrupt
+Sending a LoRaWAN packet on interrupt.
 
 <!--more-->
 

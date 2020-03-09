@@ -4,7 +4,7 @@ description: ""
 weight: 3
 ---
 
-Learn to use different activation methods
+Activating the device using different activation methods
 
 <!--more-->
 
@@ -23,11 +23,9 @@ Follow the below sub-sections to understand these activation methods.
 
 Over-the-Air Activation (OTAA) is the preferred and most secure way to connect with {{%tts%}}. Devices perform a join-procedure with the network, during which a dynamic `DevAddr` is assigned and security keys are negotiated with the device.
 
-To get your device activated using the OTAA method, do the following.
+To get your device activated using the OTAA method, do the following:
 
 #### Device Registration
-
-You are now ready to register your device to the application for activating it using the OTAA method.
 
 On the application’s screen, select **Devices** from the bottom right menu.
 
@@ -56,7 +54,7 @@ In the **Devices** section, click **+ Add Device**.
 
 Click on **Create Device** to add the device.
 
-You will be redirected to the newly registered device, where you can find the generated keys under the &quot;Session Information&quot; section, which we will need in the further steps.
+You will be redirected to the newly registered device, where you can find the generated keys under the **Session Information** section, which we will need in the further steps.
 
 {{< figure src="003_adding_device.png" alt="Device overview page" >}}
 
@@ -64,7 +62,7 @@ You will be redirected to the newly registered device, where you can find the ge
 
 Now that you have registered the device, you can activate the connection from your device itself.
 
-Go to **File -> Examples -> TheThingsNetwork -> SendOTAA** and click on it to open the SendOTAA sketch.
+Go to **File -> Examples -> TheThingsNetwork -> SendOTAA** and click on it to open the `SendOTAA` sketch.
 
 {{< figure src="001_otaa_activation.png" alt="SendOTAA example code location" >}}
 
@@ -193,7 +191,7 @@ The Join requests and the messages on {{%tts%}} Console should look like the fol
 
 Your device is now activated using OTAA Activation method and is connected to {{%tts%}}.
 
-You can now directly proceed with the &quot;Sending Message on Interrupt&quot; section to learn how to add a push button and send messages on pressing the button.
+You can now directly proceed with the **Sending Message on Interrupt** section to learn how to add a push button and send messages on pressing the button.
 
 Alternatively, you can follow the next section for activating the device using the ABP method.
 
@@ -201,11 +199,9 @@ Alternatively, you can follow the next section for activating the device using t
 
 In some cases you might need to hardcode the DevAddr as well as the security keys in the device. This means activating a device by personalization (ABP). This strategy might seem simpler, because you skip the join procedure, but it has some downsides related to security.
 
-To get your device activated using the ABP method, follow the steps below.
+To get your device activated using the ABP method, follow the steps below:
 
 #### Device Registration
-
-The following steps will walk you through the process of adding the device to be activated using the ABP activation method:
 
 In the application’s screen, select **Devices** from the bottom right menu.
 
@@ -228,7 +224,7 @@ In the **Devices** box, click **+ Add Device**.
 
 Click on **Create Device** to add the device.
 
-You will be redirected to the newly registered device, where you can find the generated Keys under the &quot;Session Information&quot; section which we will need in further steps.
+You will be redirected to the newly registered device, where you can find the generated Keys under the **Session Information** section which we will need in further steps.
 
 {{< figure src="003_adding_device.png" alt="Device overview page" >}}
 
@@ -241,6 +237,8 @@ Go to **File -> Examples -> TheThingsNetwork -> SendABP** and click on it to ope
 {{< figure src="001_abp_activation.png" alt="SendABP example code location" >}}
 
 Replace `devAddr`, `nwkSKey`, and `appSKey` with the keys obtained from the device page in {{%tts%}} console.
+
+> Note: `nwkSKey` can be replaced with the `NwkSEncKey` from {{%tts%}} console.
 
 Replace `REPLACE_ME` with one of the lines below, depending on the frequency plan of your device and your country.
 
